@@ -1,7 +1,7 @@
 
 public class GameData {
 	
-	public static GameData gameData = new GameData();
+	public static GameData gameData = null;
 	public int numberAnnounced = 0;
 	public boolean noAnnouncedFlag = false;
 	public int numPlayers = NumPlayers.numPlayers;
@@ -19,7 +19,10 @@ public class GameData {
 		
 	}
 	
-	public static GameData getInstance() {
+	public static synchronized GameData getInstance() {
+		if(gameData == null) {
+			gameData = new GameData();
+		}
 		return gameData;
 	}
 }

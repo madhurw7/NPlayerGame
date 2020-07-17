@@ -1,12 +1,29 @@
+import java.util.Scanner;
+
 //import java.io.IOException;
 
 public class GameApp {
 
 	public static void main(String[] args) {
+		
+		System.out.println("Enter the number of Players(n)...");
+		Scanner scanner = null;
+		try {
+			scanner = new Scanner(System.in);
+			int x = Integer.parseInt(scanner.nextLine());
+			if(x <= 1) throw new Exception();
+			NumPlayers.setNumPlayers(x);
+		}catch(NumberFormatException e) {
+			System.out.println("Invalid Input, defaulting to n = 5.");
+		}catch(Exception e){
+			System.out.println("Invalid Input, defaulting to n = 5.");
+		}finally {
+			if(scanner != null) scanner.close();
+		}
+		
+		
+		
 		final GameData game = GameData.getInstance();
-		
-		
-//		NumPlayers.setNumPlayers(7);
 		
 		int numPlayers = NumPlayers.numPlayers;
 		final Player[] players = new Player[numPlayers];

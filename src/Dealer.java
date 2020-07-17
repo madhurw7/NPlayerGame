@@ -55,6 +55,7 @@ public class Dealer implements Runnable {
 			
 			gD.lock.notifyAll();
 			
+			System.exit(0);
 		}
 
 	}
