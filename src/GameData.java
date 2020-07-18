@@ -4,7 +4,7 @@ public class GameData {
 	public static GameData gameData = null;
 	public int numberAnnounced = 0;
 	public boolean noAnnouncedFlag = false;
-	public int numPlayers = NumPlayers.numPlayers;
+	public int numPlayers = GameSettings.getNumPlayers();
 	public boolean[] playerSuccessFlag;
 	public boolean[] playerChanceFlag;
 	public boolean gameCompleteFlag = false;

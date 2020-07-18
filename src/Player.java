@@ -5,17 +5,21 @@ public class Player implements Runnable {
 
 	private GameData gD;
 	private int id;
-	private final static int MAXNO = 10;
+	private final int MAXNO;
 	private int totalNumbersFound;
-	public final static int WIN_LIM = 3;
+	private final int WIN_LIM;
 	private HashSet<Integer> removedNums = new HashSet<Integer>(); 
 	
-	private ArrayList<Integer> ticket; //Make Arra
+	private ArrayList<Integer> ticket;
 	
 	public Player(GameData gameData, int id) {
 		this.id = id;
 		this.gD = gameData;
 		this.totalNumbersFound = 0;
+		
+		MAXNO = GameSettings.getMAXNO();
+		WIN_LIM = GameSettings.getWIN_LIM();
+		
 		Builder builder = new TicketBuilder(MAXNO);
 		this.ticket = builder.getTicket();
 		printPlayerTicket();

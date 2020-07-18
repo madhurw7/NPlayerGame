@@ -1,4 +1,4 @@
-import java.util.Random;
+import java.util.ArrayList;
 
 public class Dealer implements Runnable {
 
@@ -6,10 +6,15 @@ public class Dealer implements Runnable {
 	private int numberAnnounced  = 0;
 	private int countNums = 0; 
 	private Player[] players;
+	private ArrayList<Integer> generatedNumbers;
+	private final int MAXNO;
 	
 	public Dealer(GameData gameData, Player[] players) {
 		this.gD = gameData;
 		this.players = players;
+		MAXNO = GameSettings.getMAXNO();
+		Builder builder = new TicketBuilder(MAXNO);
+		this.generatedNumbers = builder.getTicket();
 	}
 	
 	
@@ -24,7 +29,7 @@ public class Dealer implements Runnable {
 					gD.playerChanceFlag[i] = false;
 				}
 				
-				this.setAnnouncedNumber(randInt(0, 50));//Generate a random number here instead and sleep this thread for some time
+				this.setAnnouncedNumber(generatedNumbers.get(countNums));//Generate a random number here instead and sleep this thread for some time
 				System.out.println("Dealer has announced Number " + this.numberAnnounced);
 				this.countNums++;
 				try {
@@ -80,11 +85,6 @@ public class Dealer implements Runnable {
 		this.numberAnnounced = i;
 	}
 	
-	private static int randInt(int min, int max) {
-		Random rand = new Random();
-		int randomNum = rand.nextInt((max - min) + 1) + min;
-		return randomNum;
-	}
 	
 	private void printFinalGameState() {
 		System.out.println();

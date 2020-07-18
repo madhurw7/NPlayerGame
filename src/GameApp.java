@@ -7,12 +7,13 @@ public class GameApp {
 	public static void main(String[] args) {
 		
 		System.out.println("Enter the number of Players(n)...");
+		
 		Scanner scanner = null;
 		try {
 			scanner = new Scanner(System.in);
 			int x = Integer.parseInt(scanner.nextLine());
 			if(x <= 1) throw new Exception();
-			NumPlayers.setNumPlayers(x);
+			GameSettings.setNumPlayers(x);
 		}catch(NumberFormatException e) {
 			System.out.println("Invalid Input, defaulting to n = 5.");
 		}catch(Exception e){
@@ -25,7 +26,7 @@ public class GameApp {
 		
 		final GameData game = GameData.getInstance();
 		
-		int numPlayers = NumPlayers.numPlayers;
+		int numPlayers = GameSettings.getNumPlayers();
 		final Player[] players = new Player[numPlayers];
 		final Dealer dealer = new Dealer(game, players);
 		
