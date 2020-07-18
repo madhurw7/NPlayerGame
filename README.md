@@ -1,0 +1,1 @@
+NPlayerGame is a simple Multi-Threaded, n-player Tambola-esque game, made as part of the CS F213, Object Oriented Programming. This is the final assignment in which we had to use Multi Threading and any two Design Patterns of choice.
