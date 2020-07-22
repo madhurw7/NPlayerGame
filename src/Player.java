@@ -30,8 +30,8 @@ public class Player implements Runnable {
 	@Override
 	public void run() {
 		synchronized(gD.lock) {
-			while(!gD.gameCompleteFlag) {
-				while(!gD.noAnnouncedFlag || gD.playerChanceFlag[id]) {
+			while(!gD.getGameCompleteFlag()) {
+				while(!gD.getGameCompleteFlag() && (!gD.getNoAnnouncedFlag() || gD.getPlayerChanceFlag(id)) ) {
 					try {
 						gD.lock.wait();
 					} catch(InterruptedException e) {
@@ -39,10 +39,10 @@ public class Player implements Runnable {
 					}
 				}
 				
-				if(!gD.gameCompleteFlag && !gD.playerWonMiddle) {
+				if(!gD.getGameCompleteFlag() && !gD.getSomePlayerWon()) {
 					
 					for(int i = 0; i < MAXNO; i++) {
-						if(!removedNums.contains(i) && ticket.get(i) == gD.numberAnnounced) {
+						if(!removedNums.contains(i) && ticket.get(i) == gD.getLastNumAnnounced()) {
 							this.totalNumbersFound++;
 							removedNums.add(i);
 							break;
@@ -50,13 +50,13 @@ public class Player implements Runnable {
 					}
 					
 					if(this.totalNumbersFound == WIN_LIM) {
-						gD.playerSuccessFlag[id] = true;
-						gD.playerWonMiddle = true;
+						gD.setWinnerId(id);
+						gD.setSomePlayerWon(true);
 					}
 					
 					
 				}
-				gD.playerChanceFlag[id] = true;
+				gD.setPlayerChanceFlag(true, id);
 				
 				
 				gD.lock.notifyAll();

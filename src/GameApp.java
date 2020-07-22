@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-//import java.io.IOException;
-
 public class GameApp {
 
 	public static void main(String[] args) {
@@ -21,8 +19,6 @@ public class GameApp {
 		}finally {
 			if(scanner != null) scanner.close();
 		}
-		
-		
 		
 		final GameData game = GameData.getInstance();
 		
